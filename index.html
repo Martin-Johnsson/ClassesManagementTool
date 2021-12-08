@@ -5,14 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projektarbete</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <h1>Projektarbete</h1>
-
     <div>
-      <button id="dropBtn">Sortera efter:</button>
-      <div id="dropDownContent"></div>
+      <input
+        type="radio"
+        name="programmeRadio"
+        value="Frontend"
+        id="frontend"
+      />
+      <label for="frontend">Frontend</label>
+      <input type="radio" name="programmeRadio" value="Backend" id="backend" />
+      <label for="backend">Backend</label>
+      <input type="radio" name="programmeRadio" value=".NET" id="net" />
+      <label for="net">.NET</label>
+      <button>Show students</button>
+      <!--<select name="sortSelect" id="sortSelect">
+        <option value="noFilter"></option>
+        <option value="frontEnd" id="frontEnd" onclick="getProgramme()">
+          Frontend
+        </option>
+        <option value="backEnd" id="backEnd">Backend</option>
+        <option value=".NET" id=".NET">.NET</option>
+        <option value="ageRising">Ålder(Stigande ordning)</option>
+        <option value="firstName">Förnamn(A-Ö)</option>
+        <option value="surName">Efternamn(A-Ö)</option>
+      </select>
+      !-->
     </div>
+    <div id="listDiv"></div>
     <script src="main.js"></script>
   </body>
 </html>
