@@ -9,7 +9,7 @@
   </head>
   <body>
     <h1>Projektarbete</h1>
-    <div>
+    <div id="radioButtonsDiv">
       <input
         type="radio"
         name="programmeRadio"
@@ -22,6 +22,24 @@
       <input type="radio" name="programmeRadio" value=".NET" id="net" />
       <label for="net">.NET</label>
       <button>Show students</button>
+      <div id="sortDiv">
+        <input type="radio" name="sortRadio" value="age" id="sortByAge" />
+        <label for="sortByAge">Sortera efter ålder(stigande)</label>
+        <input
+          type="radio"
+          name="sortRadio"
+          value="firstName"
+          id="sortByFirstName"
+        />
+        <label for="sortByFirstName">Sortera efter förnamnet(A-Ö)</label>
+        <input
+          type="radio"
+          name="sortRadio"
+          value="lastName"
+          id="sortByLastName"
+        />
+        <label for="sortByLastName">Sortera efter efternamnet(A-Ö)</label>
+      </div>
       <!--<select name="sortSelect" id="sortSelect">
         <option value="noFilter"></option>
         <option value="frontEnd" id="frontEnd" onclick="getProgramme()">
