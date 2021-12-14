@@ -6,14 +6,16 @@ let getData = async (URL) => {
 async function theData() {
   let students = await getData("https://api.mocki.io/v2/01047e91/students");
   let schools = await getData("https://api.mocki.io/v2/01047e91/schools");
-
   let list = document.getElementById("listDiv");
   sortDiv = document.getElementById("sortDiv");
   sortDiv.style.display = "none";
+  let infoElement = document.createElement("h2");
+  infoElement.textContent = "Tryck på student för att se matchande skola/or.";
+  list.appendChild(infoElement);
   students.forEach((student) => {
     let profileCard = document.createElement("div");
     profileCard.style.border = "2px solid black";
-    profileCard.style.margin = "0 0 5px 0";
+    profileCard.style.margin = "40px 0 60px 0";
 
     let studentName = document.createElement("p");
     studentName.textContent = `Namn: ${student.firstName} ${student.lastName}`;
@@ -32,6 +34,43 @@ async function theData() {
     profileCard.appendChild(studentProgramme);
 
     list.appendChild(profileCard);
+
+    let filterSchools = schools.filter((school) => {
+      let hobbyMatch = false;
+      student.hobbies.forEach((hobby) => {
+        if (school.activities.includes(hobby)) {
+          hobbyMatch = true;
+        }
+      });
+      return school.programmes.includes(student.programme) && hobbyMatch;
+    });
+
+    filterSchools.forEach((schools) => {
+      console.log("hej");
+      let schoolSpan = document.createElement("span");
+      schoolSpan.style.display = "none";
+      profileCard.appendChild(schoolSpan);
+
+      profileCard.addEventListener("click", () => {
+        if (schoolSpan.style.display === "none") {
+          schoolSpan.textContent = `${schools.name}`;
+          studentAge.textContent = "";
+          studentHobbies.textContent = "";
+          studentProgramme.textContent = "";
+          schoolSpan.style.display = "block";
+          schoolSpan.style.textDecoration = "underline";
+          schoolSpan.style.color = "green";
+          profileCard.style.outline = "5px solid black";
+        } else {
+          schoolSpan.style.display = "none";
+          profileCard.style.outline = "";
+          studentName.textContent = `Namn: ${student.firstName} ${student.lastName}`;
+          studentAge.textContent = `Ålder: ${student.age}`;
+          studentHobbies.textContent = `Hobbys: ${student.hobbies}`;
+          studentProgramme.textContent = `Program eleven vill gå: ${student.programme}`;
+        }
+      });
+    });
   });
 
   let button = document.querySelector("button");
@@ -57,7 +96,7 @@ async function theData() {
 
       let profileCard = document.createElement("div");
       profileCard.style.border = "2px solid black";
-      profileCard.style.margin = "0 0 5px 0";
+      profileCard.style.margin = "40px 0 60px 0";
       let studentName = document.createElement("p");
       studentName.textContent = `Namn: ${student.firstName} ${student.lastName}`;
       profileCard.appendChild(studentName);
@@ -72,16 +111,10 @@ async function theData() {
 
       list.appendChild(profileCard);
     });
-    /*createRadioInput = document.createElement("input");
-    createRadioInput.setAttribute("type", "radio");
-     createRadioInput.setAttribute("name", "ageRadio");
-     */
+
     sortDiv.style.display = "block";
     let sortRadio = document.querySelectorAll("input[name='sortRadio']");
-    //createSortButton = document.createElement("button");
-    //createSortButton.innerHTML = "Sortera efter";
-    //createSortButton.id = `sortButton`;
-    //sortDiv.appendChild(createSortButton);
+
     console.log(filterProgramme);
     let sortSelect;
     sortRadio.forEach((input) => {
@@ -97,7 +130,7 @@ async function theData() {
       sortByAge.forEach((student) => {
         let profileCard = document.createElement("div");
         profileCard.style.border = "2px solid black";
-        profileCard.style.margin = "0 0 5px 0";
+        profileCard.style.margin = "40px 0 60px 0";
         let studentName = document.createElement("p");
         studentName.textContent = `Namn: ${student.firstName} ${student.lastName}`;
         let studentAge = document.createElement("p");
@@ -134,7 +167,7 @@ async function theData() {
       sortByFirstName.forEach((student) => {
         let profileCard = document.createElement("div");
         profileCard.style.border = "2px solid black";
-        profileCard.style.margin = "0 0 5px 0";
+        profileCard.style.margin = "40px 0 60px 0";
         let studentName = document.createElement("p");
         studentName.textContent = `Namn: ${student.firstName} ${student.lastName}`;
         let studentAge = document.createElement("p");
@@ -169,7 +202,7 @@ async function theData() {
       sortByLastName.forEach((student) => {
         let profileCard = document.createElement("div");
         profileCard.style.border = "2px solid black";
-        profileCard.style.margin = "0 0 5px 0";
+        profileCard.style.margin = "40px 0 60px 0";
         let studentName = document.createElement("p");
         studentName.textContent = `Namn: ${student.firstName} ${student.lastName}`;
         let studentAge = document.createElement("p");
